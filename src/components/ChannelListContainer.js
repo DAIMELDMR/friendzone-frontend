@@ -2,7 +2,7 @@ import React from "react"
 import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
-import { ChannelSearch, GroupChannelList, TeamChannelPreview } from ".";
+import { ChannelSearch, GroupChannelList, GroupChannelPreview } from ".";
 import FrindZoneIcon from "../assets/friendzone.png"
 import LogoutIcon from "../assets/logout.png"
 
@@ -44,11 +44,33 @@ const ChannelListContainer = () => {
                     List={(listProps) => (
                         <GroupChannelList
                             {...listProps}
+                            type="group"
                         />
                     )}
-
+                    Preview={(previewProps) => {
+                        <GroupChannelPreview
+                            {...previewProps}
+                            type="group"
+                        />
+                    }}
                 />
             </div>
+            <ChannelList
+                filter={{}}
+                channelRenderFilterFn={()=>{} }
+                List={(listProps) => (
+                    <GroupChannelList
+                        {...listProps}
+                        type="messaging"
+                />
+                )}
+                Preview={(previewProps) => {
+                    <GroupChannelPreview
+                        {...previewProps}
+                        type="messaging"
+                    />
+                }}
+            />
         </>
     )
 }
