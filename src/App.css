@@ -120,8 +120,8 @@ body {
 
 .auth__form-container_fields-content_button button {
   border-radius: 4px;
-  background: #005fff;
-  border: 1px solid #005fff;
+  background: #203353;
+  border: 1px solid #293c5c;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
@@ -132,7 +132,7 @@ body {
 }
 
 .auth__form-container_fields-content_button button:hover {
-  background: #0066ff;
+  background: #4168a3;
 }
 
 .auth__form-container_fields-account {
