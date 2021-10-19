@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import signinImage from '../assets/signup2.jpg'
 
+//creating a instance of cookies to add the user information
+const cookies = new Cookies();
+
 const initialState = {
     fullName: '',
     username: '',
@@ -22,10 +25,35 @@ const Auth = () => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(form)
+        //getting all the information decontructed from the form
+        const { fullName, username, password, phoneNumber, avatarURL } = form;
+
+        //url from we making the request
+        const URL = 'http://localhost:4000/auth'
+
+        //getting and decontructing data
+        const { data :{token, userId, hashedPassword} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`,
+            {
+                username, fullName, password, phoneNumber, avatarURL,
+            })
+
+        //adding the user information to the cookies
+        cookies.set('token', token);
+        cookies.set('fullName', fullName)
+        cookies.set('username', username);
+        cookies.set('userId', userId)
+
+        //if we creting the user account we passing also the phoneNumber, the avatarURL and the hashedPassword
+        if (isSignup) {
+            cookies.set('phoneNumber', phoneNumber)
+            cookies.set('avatarURL', avatarURL)
+            cookies.set('hashedPassword', hashedPassword)
+        }
+        //reload te application so the authToken ins the app.js is filled and we render our chat ap and the Auth component
+        window.location.reload();
     }
 
     const switchMode = () => {
@@ -99,7 +127,7 @@ const Auth = () => {
                                 <label htmlFor="confirmPassword">Confirm Password</label>
                                 <input
                                     name="confirmPassword"
-                                    type="text"
+                                    type="password"
                                     placeholder="Confirm Password"
                                     onChange={handleChange}
                                     required

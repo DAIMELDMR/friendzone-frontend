@@ -26,7 +26,7 @@ const SideBar = () => {
 const FriendsHeader = () => {
     return(
         <div className="channel-list__header">
-            <p className = "channel-list__header__text">Friend Zone</p>
+            <p className = "channel-list__header__text">FriendZone</p>
         </div>
     )
 }
@@ -54,23 +54,23 @@ const ChannelListContainer = () => {
                         />
                     }}
                 />
-            </div>
             <ChannelList
                 filter={{}}
                 channelRenderFilterFn={()=>{} }
                 List={(listProps) => (
                     <GroupChannelList
-                        {...listProps}
-                        type="messaging"
-                />
-                )}
-                Preview={(previewProps) => {
-                    <GroupChannelPreview
+                    {...listProps}
+                    type="messaging"
+                    />
+                    )}
+                    Preview={(previewProps) => {
+                        <GroupChannelPreview
                         {...previewProps}
                         type="messaging"
-                    />
-                }}
-            />
+                        />
+                    }}
+                />
+            </div>
         </>
     )
 }
