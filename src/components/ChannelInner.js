@@ -44,7 +44,7 @@ const ChannelInner = ({ setIsEditing }) => {
 };
 
 const TeamChannelHeader = ({ setIsEditing }) => {
-    const { channel, watcherCount } = useChannelStateContext();
+    const { channel, watcher_count } = useChannelStateContext();
     const { client } = useChatContext();
 
     const MessaginHeader = () => {
@@ -68,11 +68,27 @@ const TeamChannelHeader = ({ setIsEditing }) => {
             <div className='team-channel-header__channel-wrapper'>
                 <p className='team-channel-header__name'># {channel.data.name}</p>
                 <span style={{ display: 'flex' }} onClick={() => setIsEditing(true)}>
-                    <ChannelInfo/>
+                    <ChannelInfo />
                 </span>
             </div>
         )
+    };
+    const getWatcherText = (watchers) => {
+        if (!watchers)
+            return 'No users online'
+        if (watchers === 1)
+            return '1 user online'
+        return `${watchers} user online`;
     }
-}
+
+    return (
+        <div className="team-channel-header__container">
+            <MessaginHeader />
+            <div className="team-channel-header__right">
+                <p className='team-channel-header__right-text'>{getWatcherText(watcher_count)}</p>
+            </div>
+        </div>
+    );
+};
 
 export default ChannelInner
