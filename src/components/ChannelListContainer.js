@@ -59,13 +59,13 @@ const ChannelListContainer = () => {
                     List={(listProps) => (
                         <GroupChannelList
                             {...listProps}
-                            type="group"
+                            type="team"
                         />
                     )}
                     Preview={(previewProps) => {
                         <GroupChannelPreview
                             {...previewProps}
-                            type="group"
+                            type="team"
                         />
                     }}
                 />
