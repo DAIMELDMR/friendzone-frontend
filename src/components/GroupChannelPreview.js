@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-const GroupChannelPreview = ({ channel, type }) => {
+const TeamChannelPreview = ({ channel, type }) => {
 
     const { channel: activeChannel, client } = useChatContext();
 
@@ -42,4 +42,4 @@ const GroupChannelPreview = ({ channel, type }) => {
     )
 }
 
-export default GroupChannelPreview
+export default TeamChannelPreview
