@@ -2,7 +2,7 @@ import React from "react"
 import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
-import { ChannelSearch, GroupChannelList, GroupChannelPreview } from ".";
+import { ChannelSearch, TeamChannelList, TeamChannelPreview } from ".";
 import FrindZoneIcon from "../assets/friendzone.png"
 import LogoutIcon from "../assets/logout.png"
 
@@ -33,7 +33,7 @@ const FriendsHeader = () => {
     )
 }
 
-const ChannelListContainer = () => {
+const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
 
     const logout = () => {
         cookies.remove('token');
@@ -57,29 +57,37 @@ const ChannelListContainer = () => {
                     filter={{}}
                     channelRenderFilterFn={()=>{} }
                     List={(listProps) => (
-                        <GroupChannelList
+                        <TeamChannelList
                             {...listProps}
                             type="team"
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setCreateType={setCreateType}
+                            setIsEditing={setIsEditing}
                         />
                     )}
                     Preview={(previewProps) => {
-                        <GroupChannelPreview
+                        <TeamChannelPreview
                             {...previewProps}
                             type="team"
                         />
                     }}
                 />
-            <ChannelList
-                filter={{}}
-                channelRenderFilterFn={()=>{} }
-                List={(listProps) => (
-                    <GroupChannelList
-                    {...listProps}
-                    type="messaging"
-                    />
+                <ChannelList
+                    filter={{}}
+                    channelRenderFilterFn={()=>{} }
+                    List={(listProps) => (
+                        <TeamChannelList
+                        {...listProps}
+                            type="messaging"
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setCreateType={setCreateType}
+                            setIsEditing={setIsEditing}
+                        />
                     )}
                     Preview={(previewProps) => {
-                        <GroupChannelPreview
+                        <TeamChannelPreview
                         {...previewProps}
                         type="messaging"
                         />
