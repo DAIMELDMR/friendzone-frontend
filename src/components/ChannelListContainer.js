@@ -6,7 +6,9 @@ import { ChannelSearch, GroupChannelList, GroupChannelPreview } from ".";
 import FrindZoneIcon from "../assets/friendzone.png"
 import LogoutIcon from "../assets/logout.png"
 
-const SideBar = () => {
+const cookies = new Cookies();
+
+const SideBar = ({ logout }) => {
     return(
         <div className="channel-list__sidebar">
             <div className="channel-list__sidebar__icon1">
@@ -16,7 +18,7 @@ const SideBar = () => {
             </div>
             <div className="channel-list__sidebar__icon2">
                 <div className="icon1__inner">
-                    <img src={LogoutIcon} alt="Logout" width= "30" />
+                    <img src={LogoutIcon} alt="Logout" width="30" onClick={ logout }/>
                 </div>
             </div>
         </div>
@@ -32,9 +34,22 @@ const FriendsHeader = () => {
 }
 
 const ChannelListContainer = () => {
+
+    const logout = () => {
+        cookies.remove('token');
+        cookies.remove('userId');
+        cookies.remove('username');
+        cookies.remove('fullName');
+        cookies.remove('avatarURL');
+        cookies.remove('hashedPassword');
+        cookies.remove('phoneNumber');
+
+        window.location.reload();
+    }
+
     return (
         <>
-            <SideBar />
+            <SideBar logout={logout} />
             <div className="channel-list__list__wrapper">
                 <FriendsHeader />
                 <ChannelSearch />
