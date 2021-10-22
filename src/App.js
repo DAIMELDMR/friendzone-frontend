@@ -17,48 +17,47 @@ const apiKey = 'jg6c3g9d853n';
 //getting the token from the cookies
 const authToken = cookies.get('token');
 
-
 const client = StreamChat.getInstance(apiKey)
 
-if (authToken) {
-  client.connectUser({
-    id: cookies.get('userId'),
-    name: cookies.get('username'),
-    fullName: cookies.get('fullName'),
-    image: cookies.get('avatarURL'),
-    hashedPassword: cookies.get('hashedPassword'),
-    phoneNumber: cookies.get('phoneNumber'),
-  }, authToken)
+if(authToken) {
+    client.connectUser({
+        id: cookies.get('userId'),
+        name: cookies.get('username'),
+        fullName: cookies.get('fullName'),
+        image: cookies.get('avatarURL'),
+        hashedPassword: cookies.get('hashedPassword'),
+        phoneNumber: cookies.get('phoneNumber'),
+    }, authToken)
 }
 
 
 const App = () => {
-  const [createType, setCreateType] = useState('');
-  const [isCreating, setIsCreating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+    const [createType, setCreateType] = useState('');
+    const [isCreating, setIsCreating] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
-  if (!authToken)
-    return <Auth />
+    if(!authToken) return <Auth />
 
-  return (
-    <div className="app__wrapper">
-      <Chat client={client} theme = "team light">
-        <ChannelListContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          setCreateType = {setCreateType}
-          setIsEditing = {setIsEditing}
-        />
-        <ChannelContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
-          createType={createType}
-        />
-      </Chat>
-    </div>
-  )
+    return (
+        <div className="app__wrapper">
+            <Chat client={client} theme="team light">
+                <ChannelListContainer
+                    isCreating={isCreating}
+                    setIsCreating={setIsCreating}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
+                />
+                <ChannelContainer
+                    isCreating={isCreating}
+                    setIsCreating={setIsCreating}
+                    isEditing={isEditing}
+                    setIsEditing={setIsEditing}
+                    createType={createType}
+                />
+            </Chat>
+        </div>
+    );
 }
 
-export default App
+export default App;
+

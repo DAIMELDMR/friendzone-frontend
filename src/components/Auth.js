@@ -29,15 +29,15 @@ const Auth = () => {
         e.preventDefault();
 
         //getting all the information decontructed from the form
-        const { fullName, username, password, phoneNumber, avatarURL } = form;
+        const { username, password, phoneNumber, avatarURL } = form;
 
         //url from we making the request
         const URL = 'http://localhost:4000/auth'
 
         //getting and decontructing data
-        const { data :{token, userId, hashedPassword} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`,
+        const { data :{token, userId, hashedPassword,fullName} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`,
             {
-                username, fullName, password, phoneNumber, avatarURL,
+                username, fullName: form.fullName, password, phoneNumber, avatarURL,
             })
 
         //adding the user information to the cookies
