@@ -43,7 +43,6 @@ const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, set
             }
         }}
         >
-            {/* we will render a different component depending on his type */}
             {type === 'team' ? <ChannelPreview /> : <DirectPreview />}
         </div>
     );

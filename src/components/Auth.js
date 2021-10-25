@@ -71,7 +71,6 @@ const Auth = () => {
                 <div className="auth__form-container_fields-content">
                     <p>{isSignup ? 'Sign Up' : 'Sign In'}</p>
                     <form onSubmit={handleSubmit}>
-                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="fullName">Full Name</label>
@@ -84,7 +83,6 @@ const Auth = () => {
                                 />
                             </div>
                         )}
-                        {/* i'll show this field on the signup and the signin form */}
                         <div className="auth__form-container_fields-content_input">
                             <label htmlFor="username">Username</label>
                             <input
@@ -95,7 +93,6 @@ const Auth = () => {
                                 required
                             />
                         </div>
-                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="phoneNumber">Phone Number</label>
@@ -108,7 +105,6 @@ const Auth = () => {
                                 />
                             </div>
                         )}
-                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="avatarURL">Avatar URL</label>
@@ -121,7 +117,6 @@ const Auth = () => {
                                 />
                             </div>
                         )}
-                        {/* i'll show this field on the signup and the signin form */}
                         <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="password">Password</label>
                                 <input
@@ -132,7 +127,6 @@ const Auth = () => {
                                     required
                                 />
                         </div>
-                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="confirmPassword">Confirm Password</label>
@@ -156,7 +150,6 @@ const Auth = () => {
                                 : "Dont't have an account?"
                             }
                             <span onClick={switchMode}>
-                                {/* allow to switch between the signup and sigin form */}
                                 {isSignup ? ' Sign In' : ' Sign Up'}
                             </span>
                         </p>
