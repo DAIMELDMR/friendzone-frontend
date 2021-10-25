@@ -24,11 +24,11 @@ https://frienzone-d.netlify.app/
 ![Screen Shot 2021-10-24 at 10 33 56 PM](https://user-images.githubusercontent.com/87623043/138626286-3a7dab3b-b711-4174-87af-2db39f76046b.png)
 
 ## Technologies
--React
--CSS
--Stream Chat
--JavaScrip
--Express
--Twilio
--Netlify
--Heroku
+- React
+- CSS
+- Stream Chat
+- JavaScrip
+- Express
+- Twilio
+- Netlify
+- Heroku
