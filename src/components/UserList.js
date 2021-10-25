@@ -105,11 +105,9 @@ const UserList = ({ setSelectedUsers }) => {
 
     return (
         <ListContainer>
-            {/* if we are loading we render loading users message */}
             {loading ? <div className="user-list__message">
                 Loading users...
             </div> :
-                {/* else we map over the users and render the UserItem component for each user*/}
                 (users?.map((user, i) => (
                   <UserItem index={i} key={user.id} user={user} setSelectedUsers={setSelectedUsers} />
                 ))
