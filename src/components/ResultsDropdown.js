@@ -8,14 +8,14 @@ const channelByUser = async ({ client, setActiveChannel, channel, setChannel }) 
     members: { $eq: [client.user.id, client.userID] },
   };
 
+  //getting all the direct messages channels
   const [existingChannel] = await client.queryChannels(filters);
 
-  if (existingChannel) return setActiveChannel(existingChannel);
-
+  //if there is a list we set the active channel tho the channel selected
+  if (existingChannel)
+    return setActiveChannel(existingChannel);
   const newChannel = client.channel('messaging', { members: [channel.id, client.userID] });
-
   setChannel(newChannel)
-
   return setActiveChannel(newChannel);
 };
 

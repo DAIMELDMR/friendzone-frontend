@@ -16,15 +16,17 @@ const ListContainer = ({ children }) => {
 }
 
 const UserItem = ({ user, setSelectedUsers }) => {
-    console.log(setSelectedUsers)
     const [selected, setSelected] = useState(false)
 
     const handleSelect = () => {
+        //if the user is selected we will remove it from the selectedUsers
         if(selected) {
             setSelectedUsers((prevUsers) => prevUsers.filter((prevUser) => prevUser !== user.id))
+        //otherwise we will add it to the selectedUsers
         } else {
             setSelectedUsers((prevUsers) => [...prevUsers, user.id])
         }
+        //we toggling the setSelected state
         setSelected((prevSelected) => !prevSelected)
     }
 
@@ -49,31 +51,38 @@ const UserList = ({ setSelectedUsers }) => {
 
     useEffect(() => {
         const getUsers = async () => {
-            if(loading) return;
-
+            //if we loading something we want to get out of the function
+            if (loading)
+                return;
+            //if not we want to set the state to true, we gonna start to get the users
             setLoading(true);
 
             try {
                 const response = await client.queryUsers(
+                    //we exclude ourself for the query search
                     { id: { $ne: client.userID } },
                     { id: 1 },
                     { limit: 8 }
                 );
-
+                //if we get users back we added to the user state
                 if(response.users.length) {
                     setUsers(response.users);
+                //otherwise we set list empty state to true
                 } else {
                     setListEmpty(true);
                 }
+            //in case of error we set the error state to true
             } catch (error) {
                setError(true);
             }
+            //we set loading state to false
             setLoading(false);
         }
-
+        //if we got a client(meaning we are connected) we call getUsers function
         if(client) getUsers()
     }, []);
 
+    //we handle the error
     if(error) {
         return (
             <ListContainer>
@@ -83,7 +92,7 @@ const UserList = ({ setSelectedUsers }) => {
             </ListContainer>
         )
     }
-
+    //in case that the list is empty
     if(listEmpty) {
         return (
             <ListContainer>
@@ -96,10 +105,12 @@ const UserList = ({ setSelectedUsers }) => {
 
     return (
         <ListContainer>
+            {/* if we are loading we render loading users message */}
             {loading ? <div className="user-list__message">
                 Loading users...
-            </div> : (
-                users?.map((user, i) => (
+            </div> :
+                {/* else we map over the users and render the UserItem component for each user*/}
+                (users?.map((user, i) => (
                   <UserItem index={i} key={user.id} user={user} setSelectedUsers={setSelectedUsers} />
                 ))
             )}

@@ -28,14 +28,18 @@ const EditChannel = ({ setIsEditing }) => {
     const updateChannel = async (event) => {
         event.preventDefault();
 
+        //get the name if name of the channel changed
         const nameChanged = channelName !== (channel.data.name || channel.data.id);
 
+        //if changed we update the channel name and add a message lettin know to the user fo the change and the new name for the channel
         if(nameChanged) {
             await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}`});
         }
+        //if the channel name didn't change but the numbers of users change we add the new list to the channel
         if(selectedUsers.length) {
             await channel.addMembers(selectedUsers);
         }
+        //reseting states
         setChannelName(null);
         setIsEditing(false);
         setSelectedUsers([]);

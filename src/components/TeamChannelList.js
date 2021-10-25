@@ -3,6 +3,7 @@ import React from 'react';
 import { AddChannel } from '../assets/AddChannel';
 
 const TeamChannelList = ({ setToggleContainer, children, error = false, loading, type, isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+    //if an error ocurrs i'll return a message to the user
     if(error) {
         return type === 'team' ? (
             <div className="team-channel-list">
@@ -12,7 +13,7 @@ const TeamChannelList = ({ setToggleContainer, children, error = false, loading,
             </div>
         ) : null
     }
-
+    //if is loading i'll return a message to the user let him know it is loading
     if(loading) {
         return (
             <div className="team-channel-list">
@@ -22,7 +23,7 @@ const TeamChannelList = ({ setToggleContainer, children, error = false, loading,
             </div>
         )
     }
-
+    //otherwise i'll render the channel
     return (
         <div className="team-channel-list">
             <div className="team-channel-list__header">

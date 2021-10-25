@@ -4,14 +4,15 @@ import { Channel, MessageTeam } from 'stream-chat-react';
 import { ChannelInner, CreateChannel, EditChannel } from './';
 
 const ChannelContainer = ({ isCreating, setIsCreating, isEditing, setIsEditing, createType }) => {
-    if(isCreating) {
+    //if the user is creating
+    if (isCreating) {
         return (
             <div className="channel__container">
                 <CreateChannel createType={createType} setIsCreating={setIsCreating} />
             </div>
         )
     }
-
+    //if the user is editing
     if(isEditing) {
         return (
             <div className="channel__container">
@@ -20,6 +21,7 @@ const ChannelContainer = ({ isCreating, setIsCreating, isEditing, setIsEditing, 
         )
     }
 
+    //this will render when you create a new channel or direct message and the chat history is empty
     const EmptyState = () => (
         <div className="channel-empty__container">
             <p className="channel-empty__first">This is the beginning of your chat history.</p>

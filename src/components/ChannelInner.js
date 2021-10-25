@@ -10,6 +10,7 @@ const ChannelInner = ({ setIsEditing }) => {
   const [giphyState, setGiphyState] = useState(false);
   const { sendMessage } = useChannelActionContext();
 
+  //A fuction that will check if we sending a text message, or sending a gif message
   const overrideSubmitHandler = (message) => {
     let updatedMessage = {
       attachments: message.attachments,
@@ -60,7 +61,6 @@ const TeamChannelHeader = ({ setIsEditing }) => {
                 <p className='team-channel-header__name user'>{user.fullName || user.id}</p>
               </div>
             ))}
-
             {additionalMembers > 0 && <p className='team-channel-header__name user'>and {additionalMembers} more</p>}
           </div>
         );

@@ -12,6 +12,7 @@ const ChannelSearch = ({setToggleContainer}) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        //if there is no query we clear teamChannels and directChannels states
         if (!query) {
             setTeamChannels([]);
             setDirectChannels([]);
@@ -20,19 +21,23 @@ const ChannelSearch = ({setToggleContainer}) => {
 
     const getChannels = async (text) => {
         try {
+            //we searching all channels type team who include the user
             const channelResponse = client.queryChannels({
                 type: 'team',
                 name: { $autocomplete: text },
                 members: { $in: [client.userID] }
             })
+            //we searching all users excluding the user id
             const userResponse = client.queryUsers({
                 id: { $ne: client.userID },
                 name: {$autocomplete: text }
             })
+            //we fetching both at the same time
             const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
-
+            //if we get a list of channels we add it to the teamChannels state
             if (channels.length)
                 setTeamChannels(channels);
+            //if we get a list of channels we add it to the directChannels state
             if (users.length)
                 setDirectChannels(users)
         } catch (error) {

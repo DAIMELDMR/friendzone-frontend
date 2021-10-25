@@ -7,6 +7,7 @@ import signinImage from '../assets/signup2.jpg'
 //creating a instance of cookies to add the user information
 const cookies = new Cookies();
 
+//initial state for the form state
 const initialState = {
     fullName: '',
     username: '',
@@ -21,21 +22,24 @@ const Auth = () => {
     const [form, setForm] = useState(initialState)
     const [isSignup, setIsSignup] = useState(true)
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+    const handleChange = (event) => {
+        //handling and keeping track fo all the changers in the form
+        setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        //getting all the information decontructed from the form
+        //getting all the information destructed from the form
         const { username, password, phoneNumber, avatarURL } = form;
 
         //url from we making the request
         const URL = 'http://localhost:4000/auth'
 
-        //getting and decontructing data
-        const { data :{token, userId, hashedPassword,fullName} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`,
+        //getting and destructing data from backend
+        const { data: { token, userId, hashedPassword, fullName } } = await axios
+            //toggling routes depending of the isSignup state
+            .post(`${URL}/${isSignup ? 'signup' : 'login'}`,
             {
                 username, fullName: form.fullName, password, phoneNumber, avatarURL,
             })
@@ -56,6 +60,7 @@ const Auth = () => {
         window.location.reload();
     }
 
+    //toggle states of signup
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
     }
@@ -66,6 +71,7 @@ const Auth = () => {
                 <div className="auth__form-container_fields-content">
                     <p>{isSignup ? 'Sign Up' : 'Sign In'}</p>
                     <form onSubmit={handleSubmit}>
+                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="fullName">Full Name</label>
@@ -78,6 +84,7 @@ const Auth = () => {
                                 />
                             </div>
                         )}
+                        {/* i'll show this field on the signup and the signin form */}
                         <div className="auth__form-container_fields-content_input">
                             <label htmlFor="username">Username</label>
                             <input
@@ -88,6 +95,7 @@ const Auth = () => {
                                 required
                             />
                         </div>
+                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="phoneNumber">Phone Number</label>
@@ -100,6 +108,7 @@ const Auth = () => {
                                 />
                             </div>
                         )}
+                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="avatarURL">Avatar URL</label>
@@ -112,6 +121,7 @@ const Auth = () => {
                                 />
                             </div>
                         )}
+                        {/* i'll show this field on the signup and the signin form */}
                         <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="password">Password</label>
                                 <input
@@ -122,6 +132,7 @@ const Auth = () => {
                                     required
                                 />
                         </div>
+                        {/* if is signup ill will show this field */}
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="confirmPassword">Confirm Password</label>
@@ -145,6 +156,7 @@ const Auth = () => {
                                 : "Dont't have an account?"
                             }
                             <span onClick={switchMode}>
+                                {/* allow to switch between the signup and sigin form */}
                                 {isSignup ? ' Sign In' : ' Sign Up'}
                             </span>
                         </p>

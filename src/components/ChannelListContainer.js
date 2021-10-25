@@ -6,6 +6,7 @@ import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import FriendZoneIcon from "../assets/friendzone.png"
 import LogoutIcon from "../assets/logout.png"
 
+//creating an instance of cookies
 const cookies = new Cookies();
 
 const SideBar = ({ logout }) => (
@@ -29,10 +30,12 @@ const CompanyHeader = () => (
     </div>
 )
 
+//we are to return a list of all channel with the team type
 const customChannelTeamFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'team');
 }
 
+//we are to return a list of all channel with the team type
 const customChannelMessagingFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'messaging');
 }
@@ -40,6 +43,7 @@ const customChannelMessagingFilter = (channels) => {
 const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing, setToggleContainer }) => {
     const { client } = useChatContext();
 
+    //logout function removing all the cookies
     const logout = () => {
         cookies.remove("token");
         cookies.remove('userId');
@@ -51,7 +55,7 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
 
         window.location.reload();
     }
-
+    //we get all the channels and direct messages where the user is included
     const filters = { members: { $in: [client.userID] } };
 
     return (
@@ -127,7 +131,7 @@ const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) =>
             </div>
 
             <div className="channel-list__container-responsive"
-                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#005fff"}}
+                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#1d3866"}}
             >
                 <div className="channel-list__container-toggle" onClick={() => setToggleContainer((prevToggleContainer) => !prevToggleContainer)}>
                 </div>

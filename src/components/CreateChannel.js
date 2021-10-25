@@ -15,7 +15,7 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
     return (
         <div className="channel-name-input__wrapper">
             <p>Name</p>
-            <input value={channelName} onChange={ handleChange } placeholder="channel-name" />
+            <input value={channelName} onChange={ handleChange } placeholder="channel-name (no spaces)" />
             <p>Add members</p>
         </div>
     )
@@ -28,15 +28,20 @@ const CreateChannel = ({ createType, setIsCreating }) => {
 
     const createChannel = async (event) => {
         event.preventDefault();
-
         try {
+            //creating a new channel passing all the information
             const newChannel = await client.channel(createType, channelName, {
                 name: channelName, members: selectedUsers
             });
+            //it will let us now of any changes in the channel(new messages, reactions, etc.)
             await newChannel.watch();
+            //reset the channel name field
             setChannelName('');
+            //toggling is creating state we finished the channel creation
             setIsCreating(false);
+            //reseting the selectedUsers to an array containig only us
             setSelectedUsers([client.userID]);
+            //we switch the new channel to be the active channel
             setActiveChannel(newChannel);
         } catch (error) {
             console.log(error);

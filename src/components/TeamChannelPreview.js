@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, setToggleContainer, channel, type }) => {
+    //getting the channel and the client from stream-chat
     const { channel: activeChannel, client } = useChatContext();
 
     const ChannelPreview = () => (
@@ -10,12 +11,9 @@ const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, set
         </p>
     );
 
-
     const DirectPreview = () => {
+        //going through all the users, keeping them adn throwing us outside the array
         const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
-
-        console.log(members[0]);
-
         return (
             <div className="channel-preview__item single">
                 <Avatar
@@ -30,10 +28,12 @@ const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, set
 
     return (
         <div className={
+            //toggling className depends on, if the channel is active or not
             channel?.id === activeChannel?.id
                 ? 'channel-preview__wrapper__selected'
                 : 'channel-preview__wrapper'
         }
+        //onClick fuction for change between different channels
         onClick={() => {
             setIsCreating(false);
             setIsEditing(false);
@@ -43,6 +43,7 @@ const TeamChannelPreview = ({ setActiveChannel, setIsCreating, setIsEditing, set
             }
         }}
         >
+            {/* we will render a different component depending on his type */}
             {type === 'team' ? <ChannelPreview /> : <DirectPreview />}
         </div>
     );

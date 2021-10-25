@@ -3,9 +3,12 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
+//importing components
 import { ChannelContainer, ChannelListContainer, Auth } from './components';
 
+//importing css
 import './App.css';
+
 //prebuild components from stream chat
 import 'stream-chat-react/dist/css/index.css'
 
@@ -17,8 +20,10 @@ const apiKey = 'jg6c3g9d853n';
 //getting the token from the cookies
 const authToken = cookies.get('token');
 
+//Created a instance of stream-chat
 const client = StreamChat.getInstance(apiKey)
 
+//connect User and retrieve all his messages
 if(authToken) {
     client.connectUser({
         id: cookies.get('userId'),
@@ -36,6 +41,7 @@ const App = () => {
     const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
+    //if we dont have a token from a user reder the auth component
     if(!authToken) return <Auth />
 
     return (
