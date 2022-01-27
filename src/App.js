@@ -15,7 +15,7 @@ import 'stream-chat-react/dist/css/index.css'
 //creating an instance of cookies
 const cookies = new Cookies();
 
-const apiKey = 'jg6c3g9d853n';
+const apiKey = 'hsdfq6745nbn';
 
 //getting the token from the cookies
 const authToken = cookies.get('token');

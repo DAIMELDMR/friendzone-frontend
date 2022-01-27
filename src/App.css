@@ -373,7 +373,7 @@ body {
 .channel-list__sidebar {
   width: 72px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-  #1d3866;
+    #1d3866;
   box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
   /* border-top-left-radius: 16px;
   /* border-bottom-left-radius: 16px; */
@@ -396,7 +396,7 @@ body {
 .channel-list__list__wrapper {
   display: flex;
   flex-direction: column;
-  background:#2f4c7e;
+  background: #2f4c7e;
   width: 240px;
 }
 
@@ -881,6 +881,9 @@ body {
 }
 
 @media screen and (min-width: 1070px) {
+  channel-list__sidebar {
+    position: fixed;
+  }
   .team-channel-header__name-wrapper {
     max-width: 700px;
   }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-
 import signinImage from '../assets/signup2.jpg'
 
 //creating a instance of cookies to add the user information
@@ -18,9 +17,9 @@ const initialState = {
 }
 
 const Auth = () => {
-
     const [form, setForm] = useState(initialState)
     const [isSignup, setIsSignup] = useState(true)
+
 
     const handleChange = (event) => {
         //handling and keeping track fo all the changers in the form
@@ -34,7 +33,7 @@ const Auth = () => {
         const { username, password, phoneNumber, avatarURL } = form;
 
         //url from we making the request
-        const URL = 'http://localhost:4000/auth'
+        const URL = 'https://friendzone-portfolio.herokuapp.com/auth';
 
         //getting and destructing data from backend
         const { data: { token, userId, hashedPassword, fullName } } = await axios
