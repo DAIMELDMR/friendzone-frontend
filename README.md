@@ -4,8 +4,7 @@
 This app is a chat, where friends can feel close to each others form anywere, you can create channels, or have direct nessages with fr.iends
 
 ## Access the app
-
-https://frienzone-d.netlify.app/
+http://friendzone.daimelmr.com/
 
 ## Screenshots
 
